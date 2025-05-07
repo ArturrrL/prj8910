@@ -22,6 +22,11 @@ function MovieList({ movies }) {
 
   const visibleMovies = filteredMovies.slice(currentIndex, currentIndex + 3);
 
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+    setCurrentIndex(0);
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 flex justify-center">
@@ -29,7 +34,7 @@ function MovieList({ movies }) {
           type="text"
           placeholder="Search movies..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+         onChange={handleSearchChange}
           className="search-bar w-full max-w-md p-3 rounded-full text-white placeholder-gray-400 border-none focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
