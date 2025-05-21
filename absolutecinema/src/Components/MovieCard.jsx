@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function MovieCard({ movie }) {
   const [isHovered, setIsHovered] = useState(false);
   const [youtubeId, setYoutubeId] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-   
     const url = movie.trailer;
     const videoIdMatch = url.match(/[?&]v=([^&]+)/);
     if (videoIdMatch && videoIdMatch[1]) {
@@ -17,6 +18,10 @@ function MovieCard({ movie }) {
       }
     }
   }, [movie.trailer]);
+
+  const handleBook = () => {
+    navigate(`/booking/${movie.id}`);
+  };
 
   return (
     <div
@@ -44,8 +49,11 @@ function MovieCard({ movie }) {
         <p className="text-sm text-gray-300 mt-1 line-clamp-2">{movie.description}</p>
         <p className="text-sm text-gray-400 mt-1">Genre: {movie.genre}</p>
         <p className="text-sm text-gray-400 mt-1">Showtime: {movie.showtime}</p>
-        <button className="mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full text-base font-semibold hover:from-blue-700 hover:to-purple-700 transition transform hover:scale-105">
-          View Details
+        <button
+          onClick={handleBook}
+          className="mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full text-base font-semibold hover:from-blue-700 hover:to-purple-700 transition transform hover:scale-105"
+        >
+         Забронювати
         </button>
       </div>
     </div>
